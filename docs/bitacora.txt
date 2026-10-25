@@ -1,0 +1,6 @@
+Fecha: (completar)
+Actividad: MiniReto 2 - Página principal
+Problema: El archivo se llamaba Index.html (mayúscula) y el menú apuntaba a pages/bicicletas.html y pages/rutas.html, que no existen.
+Solución: Renombrar a index.html y alinear el menú con recorridos/tarifas/contacto.
+Prueba realizada: Abrir con Live Server y revisar la consola de DevTools.
+Resultado: Página principal carga sin errores; enlaces a páginas internas se activarán en MiniReto 3 y 4.
