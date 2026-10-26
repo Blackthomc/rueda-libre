@@ -1,6 +1,71 @@
+BITACORA - RUEDA LIBRE v0.2
+==========================
+
+--- MINIRETO 5: Estructura semantica ---
 Fecha: (completar)
-Actividad: MiniReto 2 - Página principal
-Problema: El archivo se llamaba Index.html (mayúscula) y el menú apuntaba a pages/bicicletas.html y pages/rutas.html, que no existen.
-Solución: Renombrar a index.html y alinear el menú con recorridos/tarifas/contacto.
-Prueba realizada: Abrir con Live Server y revisar la consola de DevTools.
-Resultado: Página principal carga sin errores; enlaces a páginas internas se activarán en MiniReto 3 y 4.
+Actividad: Reestructurar las paginas con header, nav (lista), main, section, article, aside, address, footer y enlace "Saltar al contenido".
+Problema: Las paginas usaban estructura generica y los lectores de pantalla no podian saltar entre regiones.
+Solucion: Un unico h1 por pagina, secciones con aria-labelledby, nav con aria-label, main con id para el enlace de salto.
+Prueba realizada: Revisar el arbol de accesibilidad en Chrome DevTools (pestana Accessibility) y navegar por regiones.
+Resultado: Cada pagina expone landmarks banner, navigation, main y contentinfo.
+
+--- MINIRETO 6: Formulario de reservas ---
+Fecha: (completar)
+Actividad: Construir el formulario con el control correcto para cada dato.
+Problema: Un campo de texto para todo no valida ni ayuda al teclado movil.
+Solucion: text (nombre), email, tel, select (servicio), radio en fieldset (bicicleta), date, time, number, textarea y checkbox. Cada control con label for/id y atributo autocomplete cuando aplica.
+Prueba realizada: Tocar cada label y comprobar que el foco pasa al campo; abrir en celular y revisar el teclado.
+Resultado: Todos los campos tienen etiqueta asociada y el teclado se adapta al tipo.
+
+--- MINIRETO 7: Validacion nativa y teclado ---
+Fecha: (completar)
+Actividad: Validar con required, minlength, pattern, min/max y probar solo con teclado.
+Pruebas (dato enviado -> resultado esperado):
+  1. Formulario vacio                    -> bloquea y marca el primer campo obligatorio.
+  2. Nombre "Al"                         -> bloquea (minimo 3 caracteres).
+  3. Correo "juan@"                      -> bloquea (correo invalido).
+  4. Celular "12345"                     -> bloquea (pattern 3 + 9 digitos).
+  5. Celular "3001234567"                -> acepta.
+  6. Fecha anterior al 28/10/2026        -> bloquea (min).
+  7. Hora 19:00                          -> bloquea (max 17:00).
+  8. Personas 0 u 11                     -> bloquea (min 1, max 10).
+  9. Sin elegir bicicleta                -> bloquea (radio required).
+ 10. Sin aceptar tratamiento de datos    -> bloquea (checkbox required).
+ 11. Todos los datos correctos           -> envia.
+Teclado: Tab recorre en orden logico; flechas cambian el radio; Espacio marca el checkbox; Enter envia.
+Resultado: (completar con lo observado en tu navegador)
+
+--- MINIRETO 8: Auditoria, contraste y publicacion ---
+Fecha: (completar)
+Actividad: Auditar accesibilidad, validar contraste de la paleta y publicar en GitHub Pages.
+Contraste (WCAG 2.1 AA: 4.5:1 texto normal, 3:1 componentes de interfaz). Paleta PROPUESTA, reemplazar por la del cliente y recalcular:
+  Texto principal sobre fondo          #1F2933 sobre #FFFFFF  14.76:1  CUMPLE (texto normal)
+  Texto secundario sobre fondo         #52606D sobre #FFFFFF  6.46:1  CUMPLE (texto normal)
+  Enlaces sobre fondo                  #0B5CAD sobre #FFFFFF  6.67:1  CUMPLE (texto normal)
+  Texto blanco sobre verde marca       #FFFFFF sobre #1B6B3A  6.54:1  CUMPLE (texto normal)
+  Texto blanco sobre naranja acento    #FFFFFF sobre #E8590C  3.58:1  NO CUMPLE (texto normal)
+  Texto oscuro sobre naranja acento    #1F2933 sobre #E8590C  4.12:1  NO CUMPLE (texto normal)
+  Texto oscuro sobre verde claro       #1F2933 sobre #E3F4E8  12.91:1  CUMPLE (texto normal)
+  Borde de campos sobre fondo          #52606D sobre #FFFFFF  6.46:1  CUMPLE (componente UI)
+  Anillo de foco sobre fondo           #0B5CAD sobre #FFFFFF  6.67:1  CUMPLE (componente UI)
+  Mensaje de error sobre fondo         #B42318 sobre #FFFFFF  6.57:1  CUMPLE (texto normal)
+
+Mapa de uso de color para el CSS de manana:
+  - Texto de parrafos y encabezados: #1F2933 sobre #FFFFFF
+  - Texto secundario/ayudas: #52606D sobre #FFFFFF
+  - Enlaces: #0B5CAD (mantener subrayado para no depender solo del color)
+  - Boton principal: fondo #1B6B3A con texto #FFFFFF
+  - Acento naranja #E8590C: NO cumple para texto normal ni con blanco (3.58:1) ni con oscuro (4.12:1). Usarlo solo en elementos decorativos, iconos/bordes (3:1) o texto grande (18 pt o 14 pt negrita). Para texto pequeno sobre acento, oscurecerlo (ej. #C2410C) y recalcular.
+  - Bordes de campos: #52606D; anillo de foco: #0B5CAD
+  - Errores: #B42318 + icono o texto (no solo color)
+
+Checklist de auditoria:
+  [ ] Un solo h1 por pagina y sin saltos de nivel
+  [ ] Todas las imagenes con alt
+  [ ] Todos los campos con label
+  [ ] Enlaces con texto descriptivo
+  [ ] Navegacion completa con teclado y foco visible
+  [ ] Lighthouse Accessibility >= 90 (completar puntaje)
+  [ ] Validador HTML de W3C sin errores
+Publicacion: Settings > Pages > Deploy from a branch > main / (root). URL: https://TU-USUARIO.github.io/rueda-libre/
+Resultado: (completar con la URL publicada)
