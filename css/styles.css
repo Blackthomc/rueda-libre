@@ -1,0 +1,474 @@
+/* ==========================================================
+   RUEDA LIBRE v1.0 - Hoja de estilos única
+   Orden: 0 Variables · 1 Base · 2 Tipografía · 3 Enlaces
+          4 Layout · 5 Componentes · 6 Páginas · 7 Responsive · 8 Accesibilidad
+   Regla de especificidad: se usan clases (0,1,0) y se evita !important
+   y los id para estilos. Cada conflicto resuelto está comentado.
+   ========================================================== */
+
+/* ---------- 0. VARIABLES (tokens de marca) ---------- */
+:root {
+  /* Colores: pares validados en docs/bitacora.txt (WCAG AA) */
+  --color-texto: #1F2933;
+  --color-texto-suave: #52606D;
+  --color-fondo: #FFFFFF;
+  --color-marca: #1B6B3A;
+  --color-marca-oscuro: #14532D;
+  --color-marca-claro: #E3F4E8;
+  --color-enlace: #0B5CAD;
+  --color-acento: #fff;        /* solo decorativo / elementos no textuales */
+  --color-acento-texto: #fff;  /* acento apto para texto (5.18:1) */
+  --color-error: #B42318;
+  --color-borde: #52606D;
+  --color-borde-suave: #CBD2D9;
+  --color-foco: #0B5CAD;
+
+  /* Tipografía */
+  --fuente-titulos: "Poppins", "Segoe UI", Arial, sans-serif;
+  --fuente-texto: "Inter", "Segoe UI", Arial, sans-serif;
+
+  /* Espaciado en rem (escala consistente) */
+  --espacio-1: 0.25rem;
+  --espacio-2: 0.5rem;
+  --espacio-3: 1rem;
+  --espacio-4: 1.5rem;
+  --espacio-5: 2.5rem;
+
+  --radio: 0.5rem;
+  --ancho-max: 60rem;
+}
+
+/* ---------- 1. BASE ---------- */
+/* box-sizing: el ancho incluye padding y borde, en todos los elementos */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Herencia: color, fuente e interlineado se definen una vez en body
+   y todos los descendientes los heredan */
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: var(--espacio-3) 0;
+}
+
+figcaption {
+  font-size: 0.875rem;
+  color: var(--color-texto-suave);
+}
+
+/* ---------- 2. TIPOGRAFÍA ---------- */
+h1,
+h2,
+h3 {
+  font-family: var(--fuente-titulos);
+  line-height: 1.25;
+  color: var(--color-marca);
+}
+
+h1 { font-size: 2rem; margin: 0 0 var(--espacio-3); }
+h2 { font-size: 1.5rem; margin: var(--espacio-5) 0 var(--espacio-3); }
+h3 { font-size: 1.25rem; }
+
+p,
+li {
+  max-width: 70ch; /* longitud de línea cómoda */
+}
+
+small {
+  color: var(--color-texto-suave);
+}
+
+address {
+  font-style: normal;
+}
+
+/* ---------- 3. ENLACES ---------- */
+/* Orden LVHFA: link, visited, hover, focus, active */
+a {
+  color: var(--color-enlace);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+a:visited {
+  color: #5B3FA0;
+}
+
+a:hover {
+  color: var(--color-marca-oscuro);
+  text-decoration-thickness: 0.15em;
+}
+
+a:active {
+  color: var(--color-texto);
+}
+
+/* Foco visible para teclado, mismo estilo en todo el sitio */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-foco);
+  outline-offset: 3px;
+}
+
+/* Enlaces externos: indicador decorativo (el texto ya avisa) */
+a[target="_blank"]::after {
+  content: " \2197";
+  content: " \2197" / "";
+}
+
+/* ---------- 4. LAYOUT ---------- */
+/* Posicionamiento: enlace de salto oculto fuera de pantalla hasta recibir foco */
+body > a:first-child {
+  position: absolute;
+  top: -4rem;
+  left: var(--espacio-3);
+  z-index: 20;
+  padding: var(--espacio-2) var(--espacio-3);
+  background-color: var(--color-texto);
+  color: #FFFFFF;
+  border-radius: var(--radio);
+}
+
+body > a:first-child:focus {
+  top: var(--espacio-2);
+}
+
+/* Posicionamiento: encabezado fijo al hacer scroll */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2) var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  background-color: var(--color-marca);
+  color: #FFFFFF;
+  border-bottom: 4px solid var(--color-acento);
+}
+
+header p {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: 1.25rem;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-1) var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Conflicto de especificidad: "a" (0,0,1) vs "header nav a" (0,0,3).
+   Los enlaces del menú necesitan ser blancos sobre el verde, así que se
+   usa un selector de contexto más específico en lugar de !important. */
+header nav a {
+  display: inline-block;
+  padding: var(--espacio-1) var(--espacio-2);
+  color: #FFFFFF;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+}
+
+header nav a:visited {
+  color: #FFFFFF;
+}
+
+header nav a:hover {
+  color: #FFFFFF;
+  border-bottom-color: #FFFFFF;
+}
+
+/* Página actual: se indica con borde y peso, no solo con color */
+header nav a[aria-current="page"] {
+  font-weight: 700;
+  border-bottom-color: var(--color-acento);
+}
+
+/* El foco azul no se ve sobre verde: en el header se usa blanco */
+header a:focus-visible {
+  outline-color: #FFFFFF;
+}
+
+main {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: var(--espacio-4);
+}
+
+footer {
+  margin-top: var(--espacio-5);
+  padding: var(--espacio-4);
+  background-color: var(--color-marca-claro);
+  text-align: center;
+}
+
+footer p {
+  margin: var(--espacio-2) auto;
+}
+
+/* ---------- 5. COMPONENTES ---------- */
+
+/* Botones (aplica a <button> y a enlaces con clase .btn) */
+.btn,
+button {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #FFFFFF;
+  background-color: var(--color-marca);
+  border: 2px solid var(--color-marca);
+  border-radius: var(--radio);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Conflicto de especificidad: "a:visited" y "a:hover" (0,1,1) ganan sobre
+   ".btn" (0,1,0) y cambiarían el color del texto del botón. Se resuelve
+   igualando el selector: ".btn:visited" y ".btn:hover" (0,2,0). */
+.btn:visited {
+  color: #FFFFFF;
+}
+
+.btn:hover,
+button:hover {
+  color: #FFFFFF;
+  background-color: var(--color-marca-oscuro);
+  border-color: var(--color-marca-oscuro);
+}
+
+.btn:active,
+button:active {
+  transform: translateY(1px);
+}
+
+/* Botón secundario (reset): contorno, sin relleno */
+button[type="reset"] {
+  color: var(--color-marca);
+  background-color: transparent;
+}
+
+button[type="reset"]:hover {
+  color: #FFFFFF;
+}
+
+/* Tarjetas */
+.card-grid {
+  display: grid;
+  gap: var(--espacio-4);
+}
+
+.card {
+  position: relative;            /* referencia para la barra decorativa */
+  overflow: hidden;
+  padding: var(--espacio-4);
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde-suave);
+  border-radius: var(--radio);
+}
+
+.card::before {                  /* barra superior en posición absoluta */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-acento);
+}
+
+.card h2,
+.card h3 {
+  margin-top: var(--espacio-2);
+}
+
+.card ul {
+  margin: 0;
+  padding-left: var(--espacio-4);
+}
+
+/* Aside destacado */
+aside {
+  padding: var(--espacio-4);
+  background-color: var(--color-marca-claro);
+  border-left: 6px solid var(--color-marca);
+  border-radius: var(--radio);
+}
+
+aside h2 {
+  margin-top: 0;
+}
+
+/* Tablas */
+.table-wrap {
+  overflow-x: auto;              /* desplazamiento horizontal en pantallas pequeñas */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  padding: var(--espacio-2) 0;
+  font-weight: 600;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid var(--color-borde-suave);
+}
+
+thead th {
+  color: #FFFFFF;
+  background-color: var(--color-marca);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--color-marca-claro);
+}
+
+tbody tr:hover {
+  background-color: #CFEBD8;
+}
+
+/* Formulario */
+fieldset {
+  margin: 0 0 var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--color-borde-suave);
+  border-radius: var(--radio);
+}
+
+legend {
+  padding: 0 var(--espacio-2);
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+  color: var(--color-marca);
+}
+
+fieldset fieldset {
+  border: 0;
+  padding: 0;
+}
+
+label {
+  font-weight: 600;
+}
+
+/* Etiquetas de radio y checkbox van al lado del control, en peso normal */
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  font-weight: 400;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-right: var(--espacio-2);
+  accent-color: var(--color-marca);
+}
+
+input:not([type="radio"]):not([type="checkbox"]),
+select,
+textarea {
+  width: 100%;
+  max-width: 28rem;
+  margin-top: var(--espacio-1);
+  padding: 0.6rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-texto);
+  background-color: var(--color-fondo);
+  border: 2px solid var(--color-borde);
+  border-radius: var(--radio);
+}
+
+/* Campo inválido solo después de que la persona interactúa con él */
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+  border-color: var(--color-error);
+  background-color: #FFF5F4;
+}
+
+input:user-valid:not([type="radio"]):not([type="checkbox"]) {
+  border-color: var(--color-marca);
+}
+
+/* ---------- 6. PÁGINAS ---------- */
+/* Hero de inicio: h1 directo de main y el párrafo que le sigue */
+main > h1 {
+  margin-top: var(--espacio-4);
+  font-size: 2.25rem;
+}
+
+main > h1 + p {
+  font-size: 1.2rem;
+  color: var(--color-texto-suave);
+}
+
+address a {
+  font-weight: 600;
+}
+
+/* ---------- 7. RESPONSIVE (mobile first) ---------- */
+@media (min-width: 48em) {
+  h1 { font-size: 2.5rem; }
+  main > h1 { font-size: 3rem; }
+
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 30em) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  main {
+    padding: var(--espacio-3);
+  }
+}
+
+/* ---------- 8. ACCESIBILIDAD ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  button {
+    transition: none;
+  }
+}

@@ -69,3 +69,40 @@ Checklist de auditoria:
   [ ] Validador HTML de W3C sin errores
 Publicacion: Settings > Pages > Deploy from a branch > main / (root). URL: https://TU-USUARIO.github.io/rueda-libre/
 Resultado: (completar con la URL publicada)
+
+
+==========================
+DIA 3 - v1.0 (MiniRetos 9 a 12)
+==========================
+
+--- MINIRETO 9: Hoja de estilos, variables y fuentes ---
+Fecha: (completar)
+Actividad: Crear css/styles.css, enlazarla en las 4 paginas, definir variables en :root y cargar Poppins e Inter desde Google Fonts.
+Problema: Colores y fuentes repetidos o sin definir; riesgo de inconsistencias.
+Solucion: Tokens de color, fuente y espaciado en :root; color y fuente heredados desde body.
+Prueba realizada: DevTools > Elements > Computed; cambiar --color-marca y verificar que todo el sitio cambia.
+Resultado: (completar)
+
+--- MINIRETO 10: Selectores, pseudoclases y especificidad ---
+Fecha: (completar)
+Actividad: Estilizar menu, enlaces, botones y campos con :hover, :focus-visible, :visited, [aria-current] y :user-invalid.
+Problema: a:hover (0,1,1) sobreescribia el texto de los botones .btn (0,1,0); los enlaces del menu perdian el blanco sobre el verde.
+Solucion: Igualar selectores (.btn:hover, .btn:visited) y usar "header nav a". Sin !important.
+Prueba realizada: Recorrer el sitio con Tab y con mouse; revisar Styles en DevTools para ver reglas tachadas.
+Resultado: (completar)
+
+--- MINIRETO 11: Box model y unidades ---
+Fecha: (completar)
+Actividad: box-sizing: border-box global; tarjetas, tablas y formulario con rem, em, % y ch.
+Problema: Campos y tarjetas se desbordaban al sumar padding y borde al ancho.
+Solucion: border-box, width 100% con max-width, tabla dentro de .table-wrap con overflow-x.
+Prueba realizada: Redimensionar de 320 px a 1280 px y revisar que no haya scroll horizontal en la pagina.
+Resultado: (completar)
+
+--- MINIRETO 12: Posicionamiento, consolidacion y lanzamiento ---
+Fecha: (completar)
+Actividad: header sticky, enlace de salto con position absolute, barra decorativa de tarjeta con ::before; consolidar y publicar v1.0.
+Problema: (completar)
+Solucion: (completar)
+Prueba realizada: Lighthouse, validador CSS de W3C, prueba en celular, revision de que no quedan atributos style="".
+Resultado: URL publicada: (completar)
