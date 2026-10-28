@@ -32,4 +32,4 @@ rueda-libre/
 Inicio → Recorridos → Tarifas → Contacto (menú común en todas las páginas).
 
 ## Autor
-Tu nombre aquí.
+THOMAS CALLE DURANGO.
