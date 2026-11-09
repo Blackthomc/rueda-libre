@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservas | Rueda Libre</title>
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  
+  <!-- HEADER -->
+
+  
+  <header class="container d-flex flex-column flex-md-row justify-content-md-between align-items-center gap-3 py-3">
+    <a class="marca fs-4 fw-bold text-decoration-none" href="index.html">Rueda Libre</a>
+    <nav aria-label="Principal">
+      <ul class="list-unstyled d-flex flex-wrap justify-content-center gap-3 mb-0">
+        <li><a class="text-decoration-none" href="index.html">Inicio</a></li>
+        <li><a class="text-decoration-none" href="servicios.html">Servicios</a></li>
+        <li><a class="text-decoration-none" aria-current="page" href="reservas.html">Reservas</a></li>
+        <li><a class="text-decoration-none" href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+
+  <main class="container py-5">
+    <h1 class="text-primary-emphasis mb-4">Reservas</h1>
+
+    
+    <div class="row g-4">
+
+      <section class="col-12 col-md-8">
+        <h2 class="h4 text-primary-emphasis mb-3">Reserva tu bicicleta</h2>
+
+        
+        <form class="row g-3" action="#" method="post">
+        <div class="col-12">
+          <label class="form-label fw-semibold" for="nombre">Nombre completo</label>
+          <input class="form-control" type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="col-12">
+          <label class="form-label fw-semibold" for="correo">Correo electrónico</label>
+          <input class="form-control" type="email" id="correo" name="correo" required>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label class="form-label fw-semibold" for="documento">Documento</label>
+          <input class="form-control" type="text" id="documento" name="documento" required>
+        </div>
+        <div class="col-12 col-sm-6">
+          <label class="form-label fw-semibold" for="celular">Celular</label>
+          <input class="form-control" type="tel" id="celular" name="celular" required>
+        </div>
+
+          <div class="col-12">
+            <label class="form-label fw-semibold" for="modelo">Modelo</label>
+            <select class="form-select" id="modelo" name="modelo" required>
+              <option value="">Selecciona un modelo</option>
+              <option>Urbana Clásica</option>
+              <option>Urbana Plegable</option>
+              <option>Montaña Trail</option>
+              <option>Gravel Aventura</option>
+              <option>Eléctrica Urbana</option>
+              <option>Infantil</option>
+            </select>
+          </div>
+
+          
+          <div class="col-12">
+            <button class="boton-enviar w-100 py-2 fw-bold rounded border-0" type="submit">Enviar reserva</button>
+          </div>
+        </form>
+      </section>
+
+      
+      <!-- ASIDE -->
+
+      
+      <aside class="col-12 col-md-4">
+        <div class="bg-white rounded shadow-sm p-4">
+          <h2 class="h5 text-primary-emphasis mb-3">Contacto</h2>
+          <p class="text-secondary mb-1">correo@nododigital.com</p>
+          <p class="text-secondary">+57 300 000 0000</p>
+          <h3 class="h6 text-primary-emphasis mt-4">Horario</h3>
+          <p class="text-secondary mb-1">Lunes a viernes: 8:00 a. m. - 6:00 p. m.</p>
+          <p class="text-secondary mb-0">Sábados: 9:00 a. m. - 1:00 p. m.</p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  
+  <!-- FOOTER -->
+
+  
+  <footer class="bg-white border-top text-secondary py-4 mt-5">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <section class="col-12 col-md-4">
+          <h2 class="h6 text-primary-emphasis">Rueda Libre</h2>
+          <p class="mb-1">Alquiler de bicicletas y rutas guiadas.</p>
+        </section>
+        <section class="col-12 col-md-4">
+          <h2 class="h6 text-primary-emphasis">Contacto</h2>
+          <p class="mb-1">correo@nododigital.com</p>
+          <p class="mb-1">+57 300 000 0000</p>
+        </section>
+        <section class="col-12 col-md-4">
+          <h2 class="h6 text-primary-emphasis">Horario</h2>
+          <p class="mb-1">Lunes a viernes: 8:00 a. m. - 6:00 p. m.</p>
+          <p class="mb-1">Sábados: 9:00 a. m. - 1:00 p. m.</p>
+        </section>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
