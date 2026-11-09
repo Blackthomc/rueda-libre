@@ -1,0 +1,573 @@
+/* ==========================================================================
+   css/styles.css  |  VERSIÓN 1.5  |  ENFOQUE MOBILE-FIRST
+   ==========================================================================
+   QUÉ CAMBIA EN ESTA SEMANA: no cambia el HTML (salvo la tabla nueva), cambia
+   LA FORMA DE ORGANIZAR el CSS.
+
+   IDEA CENTRAL DE MOBILE-FIRST
+     1. Los estilos SIN media query describen el CELULAR (una columna).
+     2. Los estilos dentro de @media (min-width: X) AGREGAN o CAMBIAN cosas
+        "desde X px hacia arriba".
+   Por qué así: el celular es el caso más simple (todo apilado) y es el 70 %
+   de las visitas. Se parte de lo simple y se añade complejidad solo cuando
+   hay más espacio. El orden del archivo es el orden de crecimiento de la
+   pantalla:
+
+        BASE (móvil)  ->  @media 768px (tablet)  ->  @media 1200px (escritorio)
+
+   POR QUÉ EL ORDEN IMPORTA: si dos reglas chocan, gana la que está más abajo
+   (cascada). Los media queries van DESPUÉS de la base para poder
+   sobrescribirla. Y el de 1200 va DESPUÉS del de 768 por la misma razón: a
+   1280 px se cumplen las dos condiciones y debe ganar la de 1200.
+
+   min-width vs max-width
+     @media (min-width: 768px)  = "de 768 px en adelante"  (mobile-first)
+     @media (max-width: 767px)  = "de 767 px hacia abajo"   (desktop-first)
+   Aquí se usa SOLO min-width.
+
+   REGLA: no pongas un media query "por si acaso". Solo donde el contenido
+   lo necesite (portada, galería de rutas, reservas, encabezado y pie, según
+   el enunciado). Lo que ya se ve bien en móvil no se repite en tablet.
+
+   NOTA: las reglas están VACÍAS a propósito. Tu styles.css actual no se
+   toca desde aquí: mueve tus reglas de las semanas anteriores al bloque
+   correcto (ver el MAPA de abajo) y escribe el resto tú.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   MAPA: DÓNDE VA CADA COSA DE LAS SEMANAS ANTERIORES
+   --------------------------------------------------------------------------
+   Pregúntate por cada regla: ¿esto es lo que el celular necesita
+   (base) o es algo que solo tiene sentido con más ancho (media query)?
+
+     Zona                    Base (móvil)               Tablet 768 / Escritorio 1200
+     ----------------------  -------------------------  ---------------------------
+     Encabezado              marca arriba, menú debajo  vuelve la fila del MiniReto 1
+     Menú                    centrado, con wrap         (¿cambia algo?)
+     Portada                 una columna                dos columnas con fr
+     Rutas                   una columna                tres en fila
+     Flota                   ya es adaptable            (¿necesita algo?)
+     Reservas                una columna                proporción 2:1
+     Fila del formulario     (¿apilada o en fila?)      (¿cambia algo?)
+     Pie                     bloques apilados           bloques en fila
+     Imágenes y tablas       fluidas / legibles         (¿cambia algo?)
+
+   Cuando dudes, prueba en DevTools qué se rompe a 360 px.
+   ========================================================================== */
+
+
+/* ##########################################################################
+   PARTE A  |  BASE  (SIN MEDIA QUERY = MÓVIL, UNA COLUMNA)
+   ##########################################################################
+   Todo lo que escribas aquí se aplica en TODOS los anchos, a menos que un
+   media query posterior lo cambie. Por eso aquí solo va lo que vale para
+   el celular y que no necesita cambiar después.
+   ########################################################################## */
+
+
+/* --------------------------------------------------------------------------
+   A.0  REGLAS GENERALES
+   Primero, porque afectan a todo y las siguientes pueden refinarlas.
+   -------------------------------------------------------------------------- */
+
+/* box-sizing: border-box en todo. Resetea también margin y padding si
+   quieres partir de cero. */
+* {
+box-sizing: border-box;
+margin: auto;
+padding: 0%;
+}
+
+/* Herencia: font-family, color, line-height, fondo. */
+body {
+font-family: 'Times New Roman', Times, serif;
+color: black;
+background-color: white;
+}
+
+/* PASO 4 DEL ENUNCIADO: IMÁGENES FLUIDAS.
+   Una imagen tiene su ancho propio (el del archivo). Si es más ancha que su
+   contenedor, lo desborda y causa scroll horizontal en el celular.
+   La regla va aquí, sobre la etiqueta "img" y no sobre una clase, para
+   proteger TODAS las imágenes del sitio (portada, rutas, flota) de un solo
+   golpe, incluidas las que agregues después.
+   Pista: max-width relativo al contenedor y height que se ajuste solo para no
+   deformar la foto. Piensa: por qué max-width y no width? */
+img {
+max-width: fit-content;
+}
+
+
+/* --------------------------------------------------------------------------
+   A.1  ENCABEZADO Y MENÚ (versión móvil)
+   PASO 3: en el celular, el nombre del negocio va ARRIBA y el menú DEBAJO,
+   centrado.
+   Es el mismo contenedor flex del MiniReto 1, pero con otra dirección.
+   Pistas: flex-direction, align-items, text-align, gap.
+   Piensa: en una columna flex, qué eje es el principal? Cuál de las dos
+   propiedades (justify-content / align-items) centra horizontalmente ahora?
+   -------------------------------------------------------------------------- */
+.encabezado {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+gap: 12px;
+
+}
+
+.marca {
+color: black;
+text-decoration: none;
+}
+
+.menu {
+
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 10px;
+width: 100%;
+
+}
+
+.menu a {
+   text-decoration: none;
+ color: black;
+}
+
+
+
+/* --------------------------------------------------------------------------
+   A.2  PORTADA (móvil: UNA columna, texto arriba y foto debajo)
+   Si no escribes display:grid, los dos hijos ya se apilan por el flujo
+   normal. Pregúntate: necesitas un grid aquí o solo separación vertical?
+   -------------------------------------------------------------------------- */
+.portada {
+display: grid;
+padding: 2rem 3rem;
+}
+
+.portada-texto {
+margin-bottom: 2rem;
+text-align: center;
+}
+
+.portada-texto h1 {
+font-size: 2rem;
+margin-bottom: 12rem;
+
+}
+
+.portada-img {
+width: 100%;
+height: auto;
+display: block;
+}
+
+.portada-boton {
+display: inline-block;
+padding: 0.75 1.75;
+text-decoration: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   A.3  GALERÍA DE RUTAS (móvil: una columna)
+   -------------------------------------------------------------------------- */
+.rutas {
+padding: 2rem 1rem;
+max-width: 1200px;
+margin: 0 auto;
+
+}
+
+.rutas-encabezado {
+text-align: center;
+margin-bottom: 2rem;
+}
+
+.rutas-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1.5rem;
+}
+
+.ruta {
+width: 100%;
+height: 200px;
+background-color: white;
+border-radius: 8px;
+overflow: hidden;
+box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);;
+}
+
+.ruta-img {
+  width: 100%;
+  height: 200px; /* Altura fija para que todas las tarjetas sean simétricas */
+  object-fit: cover; /* Evita que la imagen se deforme al estirarse */
+  display: block;
+}
+
+.ruta-nombre {
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 1rem 1rem 0.5rem 1rem;
+  margin: 0;
+}
+
+.ruta-nivel {
+font-size: 0.9rem;
+  color: #666;
+  padding: 0 1rem 1rem 1rem;
+  margin-top: auto;
+}
+
+
+/* --------------------------------------------------------------------------
+   A.4  FLOTA (ya es adaptable desde la semana 3)
+   Revisa a 360 px: si las tarjetas se salen o aparece scroll horizontal,
+   pregúntate qué pasa si el ANCHO MÍNIMO de minmax() es mayor que el
+   ancho disponible del celular (pantalla menos relleno).
+   -------------------------------------------------------------------------- */
+.flota {
+padding: 4rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flota-encabezado {
+text-align: center;
+  margin-bottom: 3rem;
+}
+
+.flota-grid {
+display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 2rem;
+}
+
+.tarjeta {
+display: flex;
+  flex-direction: column;
+  background-color: var(--color-blanco, #ffffff);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-img {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-titulo {
+  font-size: 1.25rem;
+  margin: 1.5rem 1.5rem 0.5rem;
+  color: var(--color-primario, #333);
+}
+
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta-desc {
+  font-size: 0.95rem;
+  margin: 0 1.5rem 1rem;
+  color: var(--color-texto, #666);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.tarjeta-precio {
+ font-size: 0.95rem;
+  margin: 0 1.5rem 1rem;
+  color: var(--color-texto, #666);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.tarjeta-enlace {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0 1.5rem 1.5rem;
+  color: var(--color-secundario, black)
+}
+.tarjeta-enlace:hover {
+  background-color: var(--color-primario-oscuro, white);
+}
+
+
+/* --------------------------------------------------------------------------
+   A.5  TARIFAS (PASO 5): TABLAS LEGIBLES EN EL CELULAR SIN SCROLL LATERAL
+   HTML: <table class="tabla-tarifas"> en servicios.html
+   El problema: la tabla se estira para que quepa su contenido, y con 4
+   columnas el relleno y el tamaño de letra de escritorio no caben en 360 px.
+   El enunciado pide ajustar RELLENO (padding) y TAMAÑO DE LETRA (font-size)
+   de las celdas en móvil.
+   Pistas: width de la tabla respecto a su contenedor, border-collapse,
+   padding y font-size de th y td, y text-align de los precios.
+   Pregunta: este ajuste va en la base (móvil) o en un media query? Piensa en
+   qué dirección crece una pantalla.
+   -------------------------------------------------------------------------- */
+.tarifas {
+  padding: 2rem 1rem;
+}
+
+.tabla-tarifas {
+  width: 100%; /* Ocupa todo el ancho de su contenedor */
+  border-collapse: collapse; /* Une los bordes para ahorrar espacio */
+  margin: 1.5rem 0;
+}
+
+.tabla-tarifas caption {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.tabla-tarifas th, 
+.tabla-tarifas td {
+  padding: 0.5rem 0.25rem; /* Relleno mínimo para que quepa en 360px */
+  font-size: 0.85rem; /* Letra compacta pero legible en móvil */
+  border-bottom: 1px solid #ddd;
+}
+
+/* Pista: text-align de los precios (asumiendo que los precios van a la derecha) */
+.tabla-tarifas td:last-child, 
+.tabla-tarifas th:last-child {
+  text-align: right;
+}
+
+/* --- NUEVA PARTE: HOVER PARA RESERVAR --- */
+.btn-reservar {
+  text-decoration: none; /* Quita la línea subrayada por defecto de los enlaces */
+  transition: background-color 0.3s ease; /* Hace que el cambio de color sea suave */
+}
+
+.btn-reservar:hover {
+  background-color: #f5f5f5; /* Aplica un fondo claro (puedes cambiarlo por #e0e0e0 si lo quieres más oscuro) */
+  text-decoration: none; /* Asegura que no tenga subrayado al pasar el mouse */
+}
+
+
+/* --------------------------------------------------------------------------
+   A.6  RESERVAS Y FORMULARIO (móvil: una sola columna)
+   El formulario y el contacto se apilan. Y la fila documento + celular?
+   Decide si a 360 px caben dos campos en la misma fila o conviene
+   apilarlos (y dónde se activa la fila: en base o en un media query).
+   -------------------------------------------------------------------------- */
+.reservas-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+
+.reservas-form,
+.reservas-info {
+  width: 100%;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* En móvil, la fila contenedora también se comporta como columna */
+.campo-fila {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.campo label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Crucial para que el padding no rompa el 100% */
+}
+
+.boton-enviar {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: black; /* Cambiar por tu color de acento */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.boton-enviar:hover {
+  background-color: green;
+}
+
+
+/* --------------------------------------------------------------------------
+   A.7  PIE (móvil: bloques apilados)
+   En móvil los tres bloques van uno debajo del otro. Eso se logra con
+   flex-direction (¿cuál valor?) o simplemente sin display:flex.
+   -------------------------------------------------------------------------- */
+.pie {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem; 
+  text-align: center;
+  background-color: grey;
+}
+
+.pie-bloque {
+  width: 100%; /* Asegura que cada bloque ocupe todo el ancho disponible */
+}
+
+
+/* ##########################################################################
+   PARTE B  |  TABLET  |  @media (min-width: 768px)
+   ##########################################################################
+   Todo lo de aquí se aplica DESDE 768 px hacia arriba.
+   Solo se escriben las propiedades que CAMBIAN respecto a la base: no copies
+   reglas completas.
+   Por qué 768: es el ancho típico de una tableta en vertical y un punto donde
+   el contenido ya tiene espacio para ir en columnas.
+   Qué zonas suelen necesitarlo: encabezado, portada, rutas, reservas y pie.
+   ########################################################################## */
+@media (min-width: 768px) {
+
+  /* ENCABEZADO: desde tablet "se recupera la distribución del MiniReto 1"
+     (marca a un extremo, menú al otro, centrados verticalmente). Qué
+     propiedades de la base tienes que invertir? */
+  .encabezado {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* PORTADA: pasa a dos columnas con fr; el texto, centrado verticalmente. */
+  .portada {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  /* GALERÍA DE RUTAS: tres en una fila. */
+  .rutas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* RESERVAS: formulario y contacto en proporción 2:1. */
+  .reservas-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+
+  /* PIE: tres bloques en fila, alineados por arriba. */
+  .pie {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+
+  /* Otros candidatos a revisar: .campo-fila, .tabla-tarifas, relleno general.
+     Solo si realmente lo necesitan. */
+
+}
+
+
+/* ##########################################################################
+   PARTE C  |  ESCRITORIO  |  @media (min-width: 1200px)
+   ##########################################################################
+   Va DESPUÉS del bloque de 768: a 1280 px se cumplen las dos condiciones
+   (min-width 768 y min-width 1200) y, a igual especificidad, gana la que
+   está más abajo.
+   Aquí solo van refinamientos para pantallas amplias. Preguntas útiles:
+     - El contenido se estira demasiado en un monitor ancho? (max-width +
+       margin auto para centrarlo)
+     - Hay más espacio para letra más grande o más separación (gap, padding)?
+   Si algo ya se ve bien en 768, NO lo repitas aquí.
+   ########################################################################## */
+@media (min-width: 1200px) {
+
+  /* Contenedor general: Limitamos el ancho para que no se estire infinito en 4K y lo centramos */
+  main {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Portada: Más altura y separación para un look más premium y espacioso */
+  .portada {
+    min-height: 80vh; /* Ocupa el 80% de la pantalla visible */
+    padding: 4rem 2rem;
+  }
+
+  /* Título de portada: Tipografía imponente aprovechando el gran espacio */
+  .portada-texto h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+  }
+
+  /* Refinamientos para los Grids (Asumiendo que en 768px eran de 2 columnas) */
+  .flota-grid, 
+  .rutas-grid {
+    grid-template-columns: repeat(3, 1fr); /* Pasamos a 3 columnas compactas */
+    gap: 2.5rem; /* Más separación elegante entre elementos */
+  }
+
+  /* Layout de Reservas: Si hay un formulario y un mapa/sidebar, los ponemos lado a lado */
+  .reservas-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas simétricas o 1.2fr 0.8fr */
+    gap: 3rem;
+    align-items: start;
+  }
+
+}
+
+
+
+/* ==========================================================================
+   CÓMO CAZAR EL SCROLL HORIZONTAL (para la bitácora)
+   --------------------------------------------------------------------------
+   1. DevTools (F12) -> modo dispositivo (Ctrl+Shift+M) -> 360 px de ancho.
+   2. Si aparece scroll horizontal, algo es más ancho que la pantalla.
+      Para encontrarlo, en la consola de DevTools puedes pegar:
+        document.querySelectorAll('*').forEach(e => {
+          if (e.scrollWidth > document.documentElement.clientWidth) console.log(e)
+        })
+      (en la pestaña Console; lista los elementos que se pasan del ancho).
+   3. Causas típicas: una imagen sin límite de ancho, un width fijo en px, un
+      minmax() con mínimo muy grande, una tabla con mucho relleno, una palabra
+      muy larga, un gap demasiado grande.
+   4. Registra en la bitácora: QUÉ problema, EN QUÉ ANCHO, CÓMO lo resolviste.
+   ========================================================================== */

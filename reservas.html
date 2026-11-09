@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  PLANTILLA BASE: NODO DIGITAL (Semana 2, Flexbox)
+  ============================================================
+  Este archivo es una de las 3 paginas del sitio. Las tres comparten:
+    - el mismo <head>   (solo cambia el <title>)
+    - el mismo <header> (identico)
+    - el mismo <footer> (identico)
+  Solo cambia el contenido de <main>.
+  Como las tres cargan css/styles.css, se ven igual.
+
+  REGLA PARA LEER ESTE ARCHIVO:
+  El orden de arriba hacia abajo en el codigo es el orden en que
+  aparece en pantalla (flujo normal): encabezado, contenido, pie.
+  ============================================================
+-->
+
+<!--
+  DOCTYPE (arriba): le dice al navegador "esto es HTML5".
+  Sin el, el navegador entra en "modo raro" (quirks mode) y
+  interpreta mal algunos estilos. Siempre va en la linea 1.
+-->
+
+<!--
+  lang="es": declara el idioma. Sirve para lectores de pantalla,
+  traductores automaticos y buscadores. Va en <html>, que es la raiz.
+-->
+<html lang="es">
+
+<!--
+  <head>: informacion ENVOLVENTE de la pagina. Nada de lo que
+  esta aqui se dibuja en pantalla (excepto el titulo en la pestana).
+  Va ANTES del <body> porque el navegador necesita saber la
+  codificacion y los estilos antes de pintar el contenido.
+-->
+<head>
+
+  <!--
+    charset UTF-8: permite tildes, enes y simbolos (a, e, n, a. m.).
+    Debe ir de PRIMERO en el <head>: si el navegador lee texto antes
+    de saber la codificacion, puede mostrar caracteres rotos.
+  -->
+  <meta charset="UTF-8">
+
+  <!--
+    viewport: sin esta linea, el celular finge ser una pantalla de
+    escritorio (~980px) y la reduce toda. Con ella, el ancho de la
+    pagina es el ancho real del telefono. Es INDISPENSABLE para
+    ver el comportamiento responsive que pide la practica.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--
+    title: texto de la pestana del navegador y de los resultados de
+    busqueda. Es lo UNICO del <head> que cambia entre paginas.
+  -->
+  <title>Reservas | Nodo Digital</title>
+
+  <!--
+    <link> a la hoja de estilos:
+    - rel="stylesheet" -> "esto es una hoja de estilos".
+    - href="css/styles.css" -> ruta relativa DESDE ESTE archivo.
+      Como las paginas estan en la raiz y el CSS en la carpeta css/,
+      se escribe css/styles.css.
+    - Todo en MINUSCULA: en Linux, styles.css y STYLES.css son
+      archivos distintos. Si no coincide exacto, no carga.
+    Va en el <head> para que los estilos se descarguen antes de
+    pintar la pagina (evita el "parpadeo" sin estilos).
+  -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<!--
+  <body>: TODO lo que se ve en pantalla. Va despues del <head>.
+  Aqui adentro hay solo tres hermanos grandes, en este orden:
+  header, main, footer.
+-->
+<body>
+
+  <!--
+    ============================================================
+    ENCABEZADO  <header class="encabezado">   [CONTENEDOR FLEX #1]
+    ============================================================
+    POR QUE ES UN <header>: etiqueta semantica = "cabecera del sitio".
+    Ayuda a lectores de pantalla y buscadores a entender la pagina.
+
+    POR QUE VA PRIMERO: el nombre y el menu se leen y se usan antes
+    que el contenido. Es el orden natural de lectura.
+
+    POR QUE TIENE class="encabezado": la clase es el "asa" que usa
+    el CSS para seleccionarlo (.encabezado { ... }). Usamos clases
+    y no la etiqueta header a secas para poder tener otros header
+    dentro de articulos sin afectarlos.
+
+    FLEXBOX: sus HIJOS DIRECTOS son solo DOS:
+        1) <a class="marca">
+        2) <nav>
+    Flexbox solo controla hijos directos (no nietos). Por eso, al
+    aplicar display:flex a .encabezado, solo se acomodan esos dos.
+    ============================================================
+  -->
+  <header class="encabezado">
+
+    <!--
+      ITEM FLEX #1: nombre del negocio.
+      Es un <a> (enlace) porque la marca normalmente lleva a la
+      pagina de inicio. Va ANTES del <nav> en el HTML porque en una
+      fila flex el primer hijo queda a la IZQUIERDA (flex-direction
+      por defecto: row). El orden del HTML decide el orden visual.
+    -->
+    <a class="marca" href="index.html">Nodo Digital</a>
+
+    <!--
+      ITEM FLEX #2: la navegacion.
+      <nav> es semantico: "aqui hay enlaces de navegacion principal".
+      Para el header cuenta como UN solo item, sin importar cuantos
+      enlaces tenga adentro. Por eso va envolviendo la lista: asi el
+      header sigue teniendo solo 2 hijos (marca y menu) y
+      justify-content los puede mandar a extremos opuestos.
+    -->
+    <nav>
+
+      <!--
+        ------------------------------------------------------------
+        MENU  <ul class="menu">   [CONTENEDOR FLEX #2]
+        ------------------------------------------------------------
+        POR QUE <ul>: un menu ES una lista de enlaces. Semanticamente
+        es lo correcto (lista no ordenada = el orden no es numerico).
+
+        ESTE <ul> ES A LA VEZ: hijo del <nav> y CONTENEDOR de los <li>.
+        Un elemento puede ser item de un flex y contenedor de otro.
+
+        FLEXBOX: sus hijos directos son los <li>. Aqui se aplica
+        display:flex + gap + flex-wrap. Los puntos de lista y el
+        padding por defecto del <ul> se quitan desde el CSS.
+        ------------------------------------------------------------
+      -->
+      <ul class="menu">
+
+        <!--
+          Cada <li> es un ITEM FLEX del menu (hijo directo del <ul>).
+          Un <li> solo puede ir dentro de <ul> u <ol>. Es obligatorio.
+          El <a> dentro del <li> es NIETO del contenedor: flex no lo
+          ve. Por eso el gap separa los <li>, no los <a>.
+        -->
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <!-- NUEVO (semana 4): enlace a la página de reservas. Hijo directo del ul, es decir, un item flex más. -->
+        <li><a href="reservas.html">Reservas</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+
+      </ul>
+    </nav>
+  </header>
+
+
+  <!--
+    ============================================================
+    CONTENIDO PRINCIPAL  <main>
+    <!-- CAMBIA POR PÁGINA: el h1 va FUERA del layout de dos columnas, porque el título pertenece a toda la página y no a una columna. -->
+    <h1>Reservas</h1>
+
+    <!--
+      ============================================================
+      LAYOUT DE RESERVAS  <div class="reservas-layout">  [CONTENEDOR GRID 2:1]
+      ============================================================
+      POR QUÉ UN <div>: solo agrupa las dos columnas; no tiene significado
+      propio. Los significados los tienen sus hijos.
+      GRID: sus hijos directos son DOS:
+        1) <section class="reservas-form">   formulario (izquierda, 2 partes)
+        2) <aside class="reservas-info">     contacto   (derecha, 1 parte)
+      Proporción 2:1 = las unidades fr se reparten el espacio en esa razón.
+      ============================================================
+    -->
+    <div class="reservas-layout">
+
+      <!--
+        ITEM GRID #1: el formulario.
+        POR QUÉ <section> con h2: es un bloque temático con título.
+        Va PRIMERO porque es la acción principal de la página y debe quedar
+        a la izquierda (las dos terceras partes del boceto).
+      -->
+      <section class="reservas-form">
+        <h2>Reserva tu bicicleta</h2>
+
+        <!--
+          <form>: agrupa los campos y es lo que se envía.
+          action y method indican adónde y cómo se envían los datos
+          (aquí es un destino de ejemplo).
+          Hijos directos (de arriba hacia abajo): campos y botón.
+          Los atributos required y type activan la validación nativa del
+          navegador (la que debe seguir funcionando).
+        -->
+        <form class="formulario" action="#" method="post">
+
+          <!--
+            CAMPO: label + input. Se agrupan en un div para tratar cada
+            pareja como una unidad. El for del label debe coincidir con el
+            id del input: así al hacer clic en la etiqueta se enfoca el campo.
+          -->
+          <div class="campo">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+
+          <div class="campo">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" required>
+          </div>
+
+          <!--
+            FILA DE DOS CAMPOS CORTOS (paso 4): documento y celular.
+            <div class="campo-fila"> es el contenedor que los pone en la misma
+            fila. Sus hijos directos son DOS .campo.
+            Tú decides: Flexbox o Grid. Justifícalo en la bitácora.
+          -->
+          <div class="campo-fila">
+            <div class="campo">
+              <label for="documento">Documento</label>
+              <input type="text" id="documento" name="documento" required>
+            </div>
+            <div class="campo">
+              <label for="celular">Celular</label>
+              <input type="tel" id="celular" name="celular" required>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="modelo">Modelo</label>
+            <select id="modelo" name="modelo" required>
+              <option value="">Selecciona un modelo</option>
+              <option>Urbana Clásica</option>
+              <option>Urbana Plegable</option>
+              <option>Montaña Trail</option>
+              <option>Gravel Aventura</option>
+              <option>Eléctrica Urbana</option>
+              <option>Infantil</option>
+            </select>
+          </div>
+
+          <!-- El botón va de último: es la acción final del formulario. -->
+          <button class="boton-enviar" type="submit">Enviar reserva</button>
+        </form>
+      </section>
+
+      <!--
+        ITEM GRID #2: información de contacto.
+        POR QUÉ <aside>: es contenido complementario al formulario (no es
+        la acción principal). Semánticamente es un "lateral".
+        Va SEGUNDO para quedar a la derecha (un tercio).
+      -->
+      <aside class="reservas-info">
+        <h2>Contacto</h2>
+        <p>correo@nododigital.com</p>
+        <p>+57 300 000 0000</p>
+        <h3>Horario</h3>
+        <p>Lunes a viernes: 8:00 a. m. - 6:00 p. m.</p>
+        <p>Sábados: 9:00 a. m. - 1:00 p. m.</p>
+      </aside>
+
+    </div>
+  </main>
+
+
+  <!--
+    ============================================================
+    PIE DE PAGINA  <footer class="pie">   [CONTENEDOR FLEX #3]
+    ============================================================
+    POR QUE <footer>: semantica de "pie del sitio" (contacto,
+    horarios, creditos). Va al FINAL del <body>, despues del <main>,
+    porque es lo ultimo que se lee.
+
+    FLEXBOX: sus hijos directos son TRES <section class="pie-bloque">.
+    Con display:flex quedan en FILA (en vez de apilados). Son tres
+    bloques independientes, por eso cada uno es su propia <section>.
+    ============================================================
+  -->
+  <footer class="pie">
+
+    <!--
+      ITEM FLEX #1: bloque de marca.
+      <section> agrupa contenido relacionado con un titulo (h2).
+      Se usa h2 (y no h1) porque el h1 ya esta en <main>: una pagina
+      debe tener UN solo h1, y los titulos secundarios bajan a h2.
+      Todos comparten class="pie-bloque" porque reciben el MISMO
+      estilo (una clase, tres elementos).
+    -->
+    <section class="pie-bloque">
+      <h2>Nodo Digital</h2>
+      <p>Soluciones web para tu negocio.</p>
+    </section>
+
+    <!--
+      ITEM FLEX #2: bloque de contacto.
+      Los <p> de adentro NO son items flex (son nietos): se apilan
+      de forma normal, uno debajo del otro, dentro de su bloque.
+    -->
+    <section class="pie-bloque">
+      <h2>Contacto</h2>
+      <p>correo@nododigital.com</p>
+      <p>+57 300 000 0000</p>
+    </section>
+
+    <!-- ITEM FLEX #3: bloque de horario. -->
+    <section class="pie-bloque">
+      <h2>Horario</h2>
+      <p>Lunes a viernes: 8:00 a. m. - 6:00 p. m.</p>
+      <p>Sabados: 9:00 a. m. - 1:00 p. m.</p>
+    </section>
+
+  </footer>
+
+</body>
+</html>
