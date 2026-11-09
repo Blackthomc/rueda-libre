@@ -1,0 +1,13 @@
+{
+  "name": "rueda-nocturna",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:css": "@tailwindcss/cli -i ./src/input.css -o ./src/output.css --minify",
+    "watch:css": "@tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "tailwindcss": "^4.1.10"
+  }
+}

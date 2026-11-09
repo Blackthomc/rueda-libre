@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kit de componentes de interfaz para Rueda Nocturna.">
+  <title>Componentes | Rueda Nocturna</title>
+  <link rel="stylesheet" href="src/output.css">
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100">
+  <header class="border-b border-slate-800">
+    <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5" aria-label="Navegación de componentes">
+      <a class="text-xl font-extrabold text-white" href="index.html">Rueda Nocturna</a>
+      <a class="rounded-lg border border-slate-600 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-emerald-300 hover:text-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-200" href="index.html">Volver al sitio</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-6xl space-y-16 px-6 py-12 md:py-16">
+    <section>
+      <p class="mb-3 text-sm font-bold uppercase tracking-widest text-emerald-300">Rueda Libre · UI</p>
+      <h1 class="mb-4 text-4xl font-extrabold tracking-tight text-white">Kit de componentes v0.1</h1>
+      <p class="max-w-2xl leading-relaxed text-slate-400">Elementos reutilizables para mantener una interfaz clara, consistente y accesible en Rueda Nocturna.</p>
+    </section>
+
+    <section aria-labelledby="botones-titulo">
+      <h2 id="botones-titulo" class="mb-6 text-2xl font-bold text-white">Botones</h2>
+      <div class="flex flex-wrap gap-4 rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <a href="index.html#rutas" class="inline-flex rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-200">Primario</a>
+        <a href="index.html#rutas" class="inline-flex rounded-xl bg-slate-700 px-5 py-3 font-bold text-white transition hover:bg-slate-600 focus:outline-none focus:ring-4 focus:ring-slate-400">Secundario</a>
+        <a href="index.html#rutas" class="inline-flex rounded-xl border border-emerald-300 px-5 py-3 font-bold text-emerald-300 transition hover:bg-emerald-300 hover:text-slate-950 focus:outline-none focus:ring-4 focus:ring-emerald-200">Outline</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="tarjeta-titulo">
+      <h2 id="tarjeta-titulo" class="mb-6 text-2xl font-bold text-white">Tarjeta de ruta</h2>
+      <article class="max-w-sm overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-lg transition hover:border-emerald-400/70 hover:shadow-2xl">
+        <img class="h-52 w-full object-cover" src="../img/ruta-centro.png" alt="Bicicleta en un recorrido urbano">
+        <div class="p-6">
+          <span class="mb-4 inline-flex rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-bold text-emerald-300">Fácil</span>
+          <h3 class="mb-4 text-xl font-bold text-white">Luces del Centro</h3>
+          <div class="mb-5 grid grid-cols-2 gap-3 text-sm">
+            <div><p class="text-slate-500">Distancia</p><p class="mt-1 font-semibold text-slate-200">10 km</p></div>
+            <div><p class="text-slate-500">Duración</p><p class="mt-1 font-semibold text-slate-200">2 horas</p></div>
+            <div class="col-span-2"><p class="text-slate-500">Salida</p><p class="mt-1 font-semibold text-slate-200">Sede Rueda Libre</p></div>
+          </div>
+          <p class="mb-5 text-2xl font-extrabold text-emerald-300">$55.000</p>
+          <a href="index.html#inscripcion" class="inline-flex w-full justify-center rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-200">Reservar ruta</a>
+        </div>
+      </article>
+    </section>
+
+    <section aria-labelledby="alertas-titulo">
+      <h2 id="alertas-titulo" class="mb-6 text-2xl font-bold text-white">Alertas</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border-l-4 border-sky-400 bg-sky-400/10 p-5 text-sky-100" role="alert">
+          <h3 class="mb-1 font-bold">Información</h3>
+          <p class="text-sm leading-relaxed">Las rutas nocturnas salen de la sede de Rueda Libre a las 7:30 p. m.</p>
+        </div>
+        <div class="rounded-xl border-l-4 border-emerald-400 bg-emerald-400/10 p-5 text-emerald-100" role="status">
+          <h3 class="mb-1 font-bold">Inscripción confirmada</h3>
+          <p class="text-sm leading-relaxed">Tu cupo quedó registrado. Te esperamos para rodar.</p>
+        </div>
+        <div class="rounded-xl border-l-4 border-amber-400 bg-amber-400/10 p-5 text-amber-100" role="alert">
+          <h3 class="mb-1 font-bold">Recomendación</h3>
+          <p class="text-sm leading-relaxed">Llega con diez minutos de anticipación y utiliza los elementos reflectivos durante todo el recorrido.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="formulario-titulo">
+      <h2 id="formulario-titulo" class="mb-6 text-2xl font-bold text-white">Campos de formulario</h2>
+      <form class="max-w-xl space-y-6 rounded-2xl border border-slate-800 bg-slate-900 p-6" action="#" method="get">
+        <div>
+          <label for="correo" class="mb-2 block text-sm font-semibold text-slate-200">Correo electrónico</label>
+          <input id="correo" name="correo" type="email" autocomplete="email" placeholder="nombre@correo.com" aria-describedby="correo-ayuda" class="block w-full rounded-lg border border-slate-600 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 focus:border-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-300/30">
+          <p id="correo-ayuda" class="mt-2 text-sm text-slate-400">Usaremos este correo para enviarte los detalles de la ruta.</p>
+        </div>
+        <div>
+          <label for="celular" class="mb-2 block text-sm font-semibold text-slate-200">Número de celular</label>
+          <input id="celular" name="celular" type="tel" autocomplete="tel" inputmode="tel" placeholder="300 123 4567" aria-describedby="celular-ayuda" class="block w-full rounded-lg border border-slate-600 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-500 focus:border-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-300/30">
+          <p id="celular-ayuda" class="mt-2 text-sm text-slate-400">Incluye el número donde podamos contactarte.</p>
+        </div>
+        <button type="submit" class="inline-flex rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-emerald-300 focus:outline-none focus:ring-4 focus:ring-emerald-200">Enviar datos de ejemplo</button>
+      </form>
+    </section>
+
+    <section class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+      <h2 class="mb-3 text-xl font-bold text-white">Reglas del kit</h2>
+      <ul class="list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-300">
+        <li>Las tarjetas y alertas usan esquinas redondeadas; los botones mantienen el mismo radio.</li>
+        <li>Los espacios se organizan con una escala consistente de utilidades Tailwind.</li>
+        <li>El verde esmeralda identifica acciones principales y estados positivos; azul informa y ámbar advierte.</li>
+        <li>Los estados hover y focus deben ser visibles y no desplazar el contenido.</li>
+        <li>Cada campo tiene una etiqueta visible asociada mediante for e id, además de texto de ayuda.</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="border-t border-slate-800 px-6 py-7 text-center text-sm text-slate-500">Rueda Libre · Kit de componentes v0.1</footer>
+</body>
+</html>
